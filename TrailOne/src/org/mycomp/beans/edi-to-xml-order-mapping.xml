@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<medi:edimap xmlns:medi="http://www.milyn.org/schema/edi-message-mapping-1.4.xsd">
+		 
+   
+   		<medi:description name="DVD Order" version="1.0" />
+ 		
+		<medi:delimiters segment="&#10;" field="*" component="^" sub-component="~" />
+		
+   		<medi:segments xmltag="totalFile"> 	
+		<medi:segment segcode="Edh" xmltag="header">
+			
+			<medi:field xmltag="first" />
+			<medi:field xmltag="second" />
+			<medi:field xmltag="third" />
+			<medi:field xmltag="four" />
+			<medi:field xmltag="fifth" />
+		</medi:segment>
+
+		<medi:segment segcode="Edl" xmltag="lines" maxOccurs="-1">
+			
+			<medi:field xmltag="first" />
+			<medi:field xmltag="second" />
+			<medi:field xmltag="third" />
+			<medi:field xmltag="fourth" />
+			<medi:field xmltag="fifth" />
+		</medi:segment>
+   		</medi:segments>
+</medi:edimap>
