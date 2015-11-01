@@ -1,1 +1,0 @@
-sc.exe create JbossAS binPath= "C:\jboss-4.2.2.GA\bin\run.bat"
