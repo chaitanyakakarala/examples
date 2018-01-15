@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>My Application</title>
+		<script src="scripts/angular.js"></script>
+		<script src="scripts/scripts.js"></script>
+		<script src="scripts/loginService.js"></script>
+	</head>
+	<body ng-app="myapp">
+		<div controller="loginController">
+			<form>
+				UserName : <input type="text" ng-model="user.username"/><br/>
+				Password : <input type="password" ng-model="user.password"/><br/>
+				<button ng-click="submitTheForm()">Submit Form</button>
+			</form>
+		</div>
+	</body>
+</html>
