@@ -2,12 +2,9 @@ package com.example.demo;
 
 import javax.sql.DataSource;
 
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -61,7 +58,7 @@ public class BatchConfiguration {
         return writer;
     }
 
-    @Bean
+/*    @Bean
     public Job importUserJob(JobCompletionNotificationListener listener) {
         return jobBuilderFactory.get("importUserJob")
                 .incrementer(new RunIdIncrementer())
@@ -79,5 +76,5 @@ public class BatchConfiguration {
                 .processor(processor())
                 .writer(writer())
                 .build();
-    }
+    }*/
 }
