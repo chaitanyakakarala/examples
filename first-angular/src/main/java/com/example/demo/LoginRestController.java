@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+
 @RestController
 public class LoginRestController {
 
@@ -18,7 +20,10 @@ public class LoginRestController {
 		System.out.println(jsonInput.getUsername());
 		System.out.println(jsonInput.getPassword());
 		
-		return ResponseEntity.ok(username +"logged in");
+		return ResponseEntity.ok(new Gson().toJson(jsonInput));
 	}
+	
+	
+	
 	
 }

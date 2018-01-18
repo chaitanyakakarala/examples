@@ -16,23 +16,19 @@ angular.module("mainModule", [])
 		return SimpleAppService.add(person.firstName,person.lastName)
 	}
   });
-angular.module("myapp",[])
+angular.module("loginmodule",[])
 	.value("user",{
 		username: "Please enter username",
 		password: "Please enter password"
 	})
 	.service("loginService")
-	.controller("loginController",function ($scope,$http,user,loginService) 
+	.controller("LoginController",function ($scope,$http,user,loginService) 
 	{
 		console.log("We are submitting user "+user.username+" and password is "+user.password);
 		$scope.user = user;
-		$scope.submitTheForm = function () {
-			var responsePromise = $http.post("/login/"+user.username, user, {});
-		       responsePromise.success(function(data, status, headers, config) {
-		          console.log(data);
-		       });
-		        responsePromise.error(function(data, status, headers, config) {
-		          alert("Submitting form failed!");
-		       });
+		$scope.user.username=user.username;
+		$scope.user.password=user.password;
+		$scope.submitForm = function () {
+			loginService.submitUser(user);
 		}
 	});

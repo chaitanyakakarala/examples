@@ -19,4 +19,10 @@ public class FirstController {
 		return "loginform";
 	}
 	
+	@RequestMapping(method=RequestMethod.GET , path = "/register")
+	public String registerController() {
+		
+		return "registerview";
+	}
+	
 }
