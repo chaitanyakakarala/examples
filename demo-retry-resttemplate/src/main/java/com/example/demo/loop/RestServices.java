@@ -1,5 +1,7 @@
 package com.example.demo.loop;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,7 +10,12 @@ import java.util.Date;
 @Service
 public class RestServices {
 
-    RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate;
+
+    @Autowired
+    public RestServices(RestTemplate restTemplate){
+        this.restTemplate = restTemplate;
+    }
 
     public String callRestService(int order) {
         System.out.println(order+"<<<----");

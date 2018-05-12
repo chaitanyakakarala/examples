@@ -34,6 +34,8 @@ dependencies {
 	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.2.RELEASE'
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '1.5.12.RELEASE'
+// https://mvnrepository.com/artifact/com.github.rholder/guava-retrying
+	compile group: 'com.github.rholder', name: 'guava-retrying', version: '2.0.0'
 
 	testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
 	testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')

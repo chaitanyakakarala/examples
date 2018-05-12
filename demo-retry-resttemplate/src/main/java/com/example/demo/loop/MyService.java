@@ -1,31 +1,59 @@
 package com.example.demo.loop;
 
+import com.github.rholder.retry.RetryException;
+import com.github.rholder.retry.Retryer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
+import java.util.Date;
+import java.util.concurrent.Callable;
 
 @Service
 public class MyService {
 
-    @Autowired
-    RetryTemplate retryTemplate;
+    Retryer<Boolean> retryer;
 
-    @Autowired
     RestServices restServices;
 
-    public void withTemplate(int order) {
-        retryTemplate.execute(arg0 -> {
-            restServices.callRestService(order);
-            return null;
-        });
-
+    @Autowired
+    public MyService(RestServices restServices, Retryer<Boolean> retryer) {
+        this.restServices = restServices;
+        this.retryer = retryer;
     }
 
-    public void iterateOrers () {
-        for (int order = 0;order <10 ; order ++) {
-            withTemplate(order);
+    public Callable<Boolean> getCallable(int order) {
+        return new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                System.out.println("hello: " + new Date());
+                try {
+                    restServices.callRestService(order);
+                    return true;
+                } catch (Exception exp) {
+                    /*exp.printStackTrace();*/
+                    return false;
+                }
+            }
+        };
+    }
+
+    public boolean retry(int order) {
+
+        try {
+            return retryer.call(getCallable(order));
+        } catch (RetryException e) {
+            /*e.printStackTrace()*/;
+            return false;
+        } catch (Exception e) {
+            /*e.printStackTrace();*/
+            return false;
         }
     }
 
+    public void runService() {
+
+        for (int order = 0 ; order <10 ; order ++ ) {
+            retry(order);
+        }
+
+    }
 }
