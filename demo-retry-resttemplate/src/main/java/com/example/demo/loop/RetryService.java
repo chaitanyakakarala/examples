@@ -26,39 +26,41 @@ public class RetryService {
     @Value("${retry.rest.url}")
     public String restUrl;//"http://localhost:8080/parties/"
 
-        public void doretry(){
+    public void doretry(){
 
-            int[] retries = getWaitTimes(retryString);//"1,2,3,5"
-            int consecutiveFails = 0;
+        int[] retries = getWaitTimes(retryString);//"1,2,3,5"
+        int consecutiveFails = 0;
 
-            for (int order = 0; order <10; order ++) {
-                for (int retry : retries) {
-                    try{
-                        String response = restTemplate
-                                .getForObject(restUrl+order,String.class);
+        for (int order = 0; order <10; order ++) {
+            for (int retry =1;retry<= retries.length;retry++) {
+                try{
+                    String response = restTemplate
+                            .getForObject(restUrl+order,String.class);
 
-                        System.out.println(response);
-                        consecutiveFails = 0;
-                        break;
-
-                    }catch (Exception exp) {
-                        System.err.println(new Date() +" : "+exp.getMessage());
-                        consecutiveFails++;
-
-                        if (consecutiveFails >= consecutiveFailsCnt) {
-                            break;
-                        }
-                        try{
-                            Thread.sleep(multiplier*retry);
-                        }catch (InterruptedException expn){}
-                    }
-
-                }
-                if (consecutiveFails >= consecutiveFailsCnt) {
+                    System.out.println(response);
+                    consecutiveFails = 0;
                     break;
+
+                }catch (Exception exp) {
+                    if (retry == retries.length)
+                        System.err.println(new Date() +" : "+exp.getMessage());
+
+                    consecutiveFails++;
+                    if (consecutiveFails >= consecutiveFailsCnt) {
+                        break;
+                    }
+                    try{
+                        Thread.sleep(multiplier*retry);
+                    }catch (InterruptedException expn){}
+
                 }
+
+            }
+            if (consecutiveFails >= consecutiveFailsCnt) {
+                break;
             }
         }
+    }
 
     public int[] getWaitTimes(String values) {//[1,2,3,5,8]
 
