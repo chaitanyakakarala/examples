@@ -1,4 +1,4 @@
-package com.example.demo.loop;
+package com.example.demo.guavaretry;
 
 import com.github.rholder.retry.Retryer;
 import com.github.rholder.retry.RetryerBuilder;
