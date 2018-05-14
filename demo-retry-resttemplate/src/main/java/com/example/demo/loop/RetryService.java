@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -32,7 +34,7 @@ public class RetryService {
         int consecutiveFails = 0;
 
         for (int order = 0; order <10; order ++) {
-            for (int retry =1;retry<= retries.length;retry++) {
+            for (int retry =0;retry< retries.length;retry++) {
                 try{
                     String response = restTemplate
                             .getForObject(restUrl+order,String.class);
@@ -42,15 +44,15 @@ public class RetryService {
                     break;
 
                 }catch (Exception exp) {
-                    if (retry == retries.length)
-                        System.err.println(new Date() +" : "+exp.getMessage());
+
+                    System.err.println(new Date() +" : "+exp.getMessage());
 
                     consecutiveFails++;
                     if (consecutiveFails >= consecutiveFailsCnt) {
                         break;
                     }
                     try{
-                        Thread.sleep(multiplier*retry);
+                        Thread.sleep(multiplier*retries[retry]);
                     }catch (InterruptedException expn){}
 
                 }
