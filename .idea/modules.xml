@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/mutual-tls-ssl/client/client.iml" filepath="$PROJECT_DIR$/mutual-tls-ssl/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/examples.iml" filepath="$PROJECT_DIR$/.idea/examples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mutual-tls-ssl/mutual-tls.iml" filepath="$PROJECT_DIR$/mutual-tls-ssl/mutual-tls.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mutual-tls-ssl/server/server.iml" filepath="$PROJECT_DIR$/mutual-tls-ssl/server/server.iml" />
     </modules>
   </component>
 </project>
